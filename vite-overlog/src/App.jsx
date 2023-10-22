@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 // import MainView from './components/MainView';
@@ -11,10 +11,12 @@ function App() {
       <Header />
       <div className="content">
         <SideBar />
-        <Switch>
-          <Route path="/" component={MovieSearch} />
-          <Route path="/movies/:movieId" component={MovieInfo} />
-        </Switch>
+        <Router>
+          <Routes>
+            <Route path="/" element={<MovieSearch/>} />
+            {/* <Route path="/movies/:movieId" element={<MovieInfo/>} /> */}
+          </Routes>
+        </Router>
         {/* <MovieSearch /> */}
       </div>
     </div>

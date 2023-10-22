@@ -25,7 +25,7 @@ function MovieSearch() {
     return (
         <div>
             <h1>Search for your Movie here!</h1>
-            <div class="centered-container">
+            <div className="centered-container">
                 <p>
                 <input
                 type="text"
