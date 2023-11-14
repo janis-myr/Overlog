@@ -1,9 +1,11 @@
+import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 // import MainView from './components/MainView';
 import MovieSearch from './components/MovieSearch';
+import MovieInfo from './components/MovieInfo';
 
 function App() {
   return (
@@ -13,8 +15,9 @@ function App() {
         <SideBar />
         <Router>
           <Routes>
-            <Route path="/" element={<MovieSearch/>} />
-            {/* <Route path="/movies/:movieId" element={<MovieInfo/>} /> */}
+            <Route path="/"                     element={<MovieSearch/>}  />
+            <Route path="/moviesearch"          element={<MovieSearch/>}  />
+            <Route path="/movies/:movieId"      element={<MovieInfo/>}    />
           </Routes>
         </Router>
         {/* <MovieSearch /> */}

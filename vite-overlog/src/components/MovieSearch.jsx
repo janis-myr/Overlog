@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
 // const apiKey = secrets.TMDB_APIKEY.value;
 
@@ -6,11 +7,14 @@ function MovieSearch() {
     const apiKey = "912bd6961a9be1381d99cac04ba85b0e";
     const [searchQuery, setsearchQuery] = useState('');
     const [searchResults, setsearchResults] = useState([]);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         handleSearch();
     }, [searchQuery]);
 
+    /* FILMSUCHE */
     const handleSearch = async () => {
         try {
             const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=${apiKey}`);
@@ -39,14 +43,20 @@ function MovieSearch() {
                 <img src="src/components/tmdb_logo_short.svg" alt="SVG-Bild" width="50" height="25" />
                 </p>
             </div>
-            <ul>
+
+            <div className="movie-list">
                 {searchResults.map((movie) => (
-                    <li key={movie.id}>{movie.title}</li>
+                    <div key={movie.id} className="movie-item" onClick={() => navigate(`/movies/${movie.id}`)}>
+                        <img
+                            src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2/${movie.poster_path}`}
+                            alt="Movie Poster"
+                         />
+                        <p className="movie-title">{movie.title}</p>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
-    )
-    
+    )   
 };
 
 
