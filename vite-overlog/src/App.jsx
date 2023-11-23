@@ -6,23 +6,29 @@ import SideBar from './components/SideBar';
 // import MainView from './components/MainView';
 import MovieSearch from './components/MovieSearch';
 import MovieInfo from './components/MovieInfo';
+import VideogameSearch from './components/VideogameSearch';
+import VideogameInfo from './components/VideogameInfo';
 
 function App() {
   return (
+    <Router>
     <div>
       <Header />
       <div className="content">
         <SideBar />
-        <Router>
+        
           <Routes>
-            <Route path="/"                     element={<MovieSearch/>}  />
-            <Route path="/moviesearch"          element={<MovieSearch/>}  />
-            <Route path="/movies/:movieId"      element={<MovieInfo/>}    />
+            <Route path="/"                       />
+            <Route path="/movies"               element={<MovieSearch/>}  />
+            <Route path="/movies/:mediaId"      element={<MovieInfo/>}    />
+            <Route path="/videogames"           element={<VideogameSearch/>}  />
+            <Route path="/videogames/mediaId"   element={<VideogameInfo/>}  />
           </Routes>
-        </Router>
+        
         {/* <MovieSearch /> */}
       </div>
     </div>
+    </Router>
   );
 }
 

@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 
 // const apiKey = secrets.TMDB_APIKEY.value;
 
-function MovieSearch() {
-    const apiKey = "912bd6961a9be1381d99cac04ba85b0e";
+function VideogameSearch() {
+    const apiKey = "17b9f5d2f9744eeb854b9f36aac5923c";
     const [searchQuery, setsearchQuery] = useState('');
     const [searchResults, setsearchResults] = useState([]);
     const navigate = useNavigate();
@@ -14,10 +14,10 @@ function MovieSearch() {
         handleSearch();
     }, [searchQuery]);
 
-    /* FILMSUCHE */
+    /* VIDEOGAMESUCHE */
     const handleSearch = async () => {
         try {
-            const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=${apiKey}`);
+            const response = await fetch(`https://api.rawg.io/api/games/?search=${searchQuery}&api_key=${apiKey}`);
             const data = await response.json();
             setsearchResults(data.results);
             
@@ -28,17 +28,17 @@ function MovieSearch() {
     
     return (
         <div>
-            <h1>Search for your Movie here!</h1>
+            <h1>Search for your Videogame here!</h1>
             <div className="centered-container">
                 <p>
                 <input
                 type="text"
-                placeholder="Type movie name here..."
+                placeholder="Type game name here..."
                 value={searchQuery}
                 onChange={(e) => setsearchQuery(e.target.value)}
                 />
                 </p>
-            {/* <button onClick={handleSearch}>Search!</button> */}
+           
                 <p>
                 <img src="src/components/tmdb_logo_short.svg" alt="SVG-Bild" width="50" height="25" />
                 </p>
@@ -46,10 +46,10 @@ function MovieSearch() {
 
             <div className="media-list">
                 {searchResults.map((media) => (
-                    <div key={media.id} className="media-item" onClick={() => navigate(`/movies/${media.id}`)}>
+                    <div key={media.id} className="media-item" onClick={() => navigate(`/videogames/${media.id}`)}>
                         <img
-                            src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2/${media.poster_path}`}
-                            alt="Movie Poster"
+                            src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2/${movie.poster_path}`}
+                            alt="Game Poster"
                          />
                         <p className="media-title">{media.title}</p>
                     </div>
@@ -60,4 +60,4 @@ function MovieSearch() {
 };
 
 
-export default MovieSearch;
+export default VideogameSearch;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function MovieInfo() {
+function VideogameInfo() {
     const apiKey = "912bd6961a9be1381d99cac04ba85b0e";
     const {mediaId} = useParams();
     const [mediaData, setmediaData] = useState({});
@@ -13,7 +13,7 @@ function MovieInfo() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://api.themoviedb.org/3/movie/${mediaId}?api_key=${apiKey}`);
+                const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -23,7 +23,7 @@ function MovieInfo() {
                 console.log('mediaData:', mediaData);
                 
             } catch(error) {
-                console.error('Movie Data Retrieval Error', error);
+                console.error('Media Data Retrieval Error', error);
             }
         };
 
@@ -56,4 +56,4 @@ function MovieInfo() {
 }
 
         
-export default MovieInfo;
+export default VideogameInfo;
