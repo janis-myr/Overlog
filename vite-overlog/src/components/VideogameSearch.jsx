@@ -1,10 +1,11 @@
 import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { apiKey } from './VideogameKey.jsx';
 
 // const apiKey = secrets.TMDB_APIKEY.value;
 
 function VideogameSearch() {
-    const apiKey = "17b9f5d2f9744eeb854b9f36aac5923c";
+    
     const [searchQuery, setsearchQuery] = useState('');
     const [searchResults, setsearchResults] = useState([]);
     const navigate = useNavigate();

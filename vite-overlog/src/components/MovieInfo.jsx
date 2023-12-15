@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { apiKey } from './MovieKey.jsx';
 
 function MovieInfo() {
-    const apiKey = "912bd6961a9be1381d99cac04ba85b0e";
+    
     const {mediaId} = useParams();
     const [mediaData, setmediaData] = useState({});
 
