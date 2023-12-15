@@ -7,4 +7,4 @@ I am currently working on basic navigation and API implementation, next steps wi
 - CSS visuals
 - backend code with a database to store userdata
 
-APIs i am using currently are TMDB for Movies and RAWG for Videogames
+APIs i am using currently are TMDB for movies and RAWG for videogames
