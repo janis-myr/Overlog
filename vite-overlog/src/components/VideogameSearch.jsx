@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 import { apiKey } from './VideogameKey.jsx';
 
 // const apiKey = secrets.TMDB_APIKEY.value;
@@ -10,22 +11,24 @@ function VideogameSearch() {
     const [searchResults, setsearchResults] = useState([]);
     const navigate = useNavigate();
 
-
     useEffect(() => {
         handleSearch();
     }, [searchQuery]);
 
     /* VIDEOGAMESUCHE */
-    const handleSearch = async () => {
+    const handleSearch = _.debounce(async () => {
         try {
-            const response = await fetch(`https://api.rawg.io/api/games/?search=${searchQuery}&api_key=${apiKey}`);
-            const data = await response.json();
-            setsearchResults(data.results);
-            
-        }   catch(error) {
+            if (searchQuery.trim() !== '') {
+                const response = await fetch(`https://api.rawg.io/api/games?search=${searchQuery}&key=${apiKey}`);
+                const data = await response.json();
+                setsearchResults(data.results);
+            } else {
+                setsearchResults([]);
+            }
+        } catch (error) {
             console.error('Search Error', error);
         }
-    }
+    }, 800);
     
     return (
         <div>
@@ -49,10 +52,10 @@ function VideogameSearch() {
                 {searchResults.map((media) => (
                     <div key={media.id} className="media-item" onClick={() => navigate(`/videogames/${media.id}`)}>
                         <img
-                            src={`https://image.tmdb.org/t/p/w220_and_h330_bestv2/${movie.poster_path}`}
+                            src={media.background_image}
                             alt="Game Poster"
                          />
-                        <p className="media-title">{media.title}</p>
+                        <p className="media-title">{media.name}</p>
                     </div>
                 ))}
             </div>

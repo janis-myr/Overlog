@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import _ from 'lodash';
 import { apiKey } from './MovieKey.jsx';
 
 // const apiKey = secrets.TMDB_APIKEY.value;
@@ -16,16 +17,19 @@ function MovieSearch() {
     }, [searchQuery]);
 
     /* FILMSUCHE */
-    const handleSearch = async () => {
+    const handleSearch = _.debounce(async () => {
         try {
+            if (searchQuery.trim() !== '') {
             const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=${apiKey}`);
             const data = await response.json();
-            setsearchResults(data.results);
-            
-        }   catch(error) {
+                setsearchResults(data.results);
+            } else {
+                setsearchResults([]);
+            }
+        } catch (error) {
             console.error('Search Error', error);
         }
-    }
+    }, 800);
     
     return (
         <div>

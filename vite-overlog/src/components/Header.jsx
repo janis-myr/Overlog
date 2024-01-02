@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Header() {
 
@@ -20,6 +20,20 @@ function Header() {
     // Routing path in Element anzeigen können
     const navigate = useNavigate();
     const location = useLocation();
+
+    const [logoSrc, setLogoSrc] = useState('');
+    const [logoLink, setLogoLink] = useState('');
+
+    useEffect(() => {
+        if (location.pathname.includes('/movies')) {
+          setLogoSrc('src/components/tmdb_logo_short.svg');
+          setLogoLink('https://www.themoviedb.org/');
+        } else if (location.pathname.includes('/videogames')) {
+          setLogoSrc('/path/to/videogames-logo.svg');
+          setLogoLink('https://rawg.io');
+        } 
+      }, [location.pathname]);
+
     const getMediaType = () => {
         const path = location.pathname.toLowerCase();
 
@@ -38,9 +52,9 @@ function Header() {
 
     return (
         <header>
-         <h1> OverLog </h1> 
-         <p> Log your media!</p>
-         <div className="mainbar" onMouseLeave={handleMouseLeave}>
+        <h1> OverLog </h1> 
+        <p> Log your media!</p>
+        <div className="mainbar" onMouseLeave={handleMouseLeave}>
 
             <button 
                     onMouseEnter={handleMouseEnter}                  
@@ -56,7 +70,20 @@ function Header() {
                 </ul>
             )}   
             
-         </div>
+        </div>
+
+        <div className="apiReference">
+            <span class="pb"> 
+                powered 
+                <br />
+                by
+            </span>
+            <a className="active" href={logoLink} target="_blank" rel="noopener noreferrer">
+                <img src={logoSrc} alt="Logo" width="100" height="50" />
+                
+            </a>
+        </div>
+         
         </header>
          
     );

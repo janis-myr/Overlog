@@ -18,6 +18,33 @@
   left: 0;
 }
 
+.apiReference {
+  display: flex;
+}
+
+.apiReference a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #000;
+}
+
+.apiReference a.active[href="/movies"] {
+  background-image: url('components/tmdb_logo_short.svg');
+  width: 50px;
+  height: 25px;
+}
+
+.pb {
+  color: white;        /* Textfarbe auf Weiß setzen */
+  display: inline-block; /* Block-Element in der Zeile platzieren */
+}
+
+
+.pb::after {
+  content: attr(data-second-line); /* Zeige den Inhalt des benutzerdefinierten Attributs 'data-second-line' als Pseudo-Element an */
+  display: block; /* In ein Blockelement umwandeln, um es rechtsbündig zu machen */
+  text-align: right; /* Rechtsbündige Ausrichtung */
+}
 /* .mainbar {
   display: flex;
   flex-direction: column;
